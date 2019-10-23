@@ -9,13 +9,17 @@
 };
 
 inputZone = document.createElement('div');
+inputZone.style.position = 'sticky';
+inputZone.style.top = "0px";
+inputZone.style.padding = "5px";
+inputZone.style.width = 'fit-content';
+inputZone.style.backgroundColor = 'white';
 document.body.appendChild(inputZone);
 
 input = document.createElement('input');
 inputZone.appendChild(input);
 
 outputZone = document.createElement('div');
-outputZone.style.maxHeight = '90%';
 document.body.appendChild(outputZone);
 
 infoZone = document.createElement('div');
@@ -100,7 +104,8 @@ LEAVE HOME
 
     setScore();
     setPep();
-    outputZone.appendChild(output);
+    outputZone.prepend(output);
+    document.body.scrollTop = 0;
 }
 
 input.addEventListener('keyup', enterListener)</script>
