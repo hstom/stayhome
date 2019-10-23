@@ -1,0 +1,109 @@
+<html>
+    <head>
+    </head>
+    <body>
+            <script>
+                const LOCATIONS = {
+    DEN : true,
+    KITCHEN: true
+};
+
+inputZone = document.createElement('div');
+document.body.appendChild(inputZone);
+
+input = document.createElement('input');
+inputZone.appendChild(input);
+
+outputZone = document.createElement('div');
+outputZone.style.maxHeight = '90%';
+document.body.appendChild(outputZone);
+
+infoZone = document.createElement('div');
+infoZone.style.position = 'absolute';
+infoZone.style.top = '0px';
+infoZone.style.right = '0px';
+document.body.appendChild(infoZone);
+
+scoreZone = document.createElement('div');
+infoZone.appendChild(scoreZone);
+
+let score = 0;
+
+pepZone = document.createElement('div');
+infoZone.appendChild(pepZone);
+
+let pep = 0;
+
+setScore = () => scoreZone.textContent = `score: ${score}`;
+setScore();
+
+setPep = () => pepZone.textContent = `pep: ${pep}`;
+setPep();
+
+initialPrompt = document.createElement('pre');
+initialPrompt.textContent = `
+WELCOME TO STAYHOME SIMULATOR 2019
+DO WHAT YOU MUST
+(case sensitive)`;
+outputZone.appendChild(initialPrompt);
+
+enterListener = (e) => {
+    if(e.key == 'Enter') {
+        const command = input.value;
+        input.value = "";
+        handle(command);
+    }
+};
+
+handle = command => {
+    output = document.createElement('pre');
+    if(command == "LEAVE HOME") {
+        output.textContent = 
+`You bravely leave home, but soon learn there are no cats to pet, and naught but fresca to imbibe
+=== YOU LOSE ===
+final score: ${score}`;
+
+    } else if (command == "DRINK COFFEE") {
+        pep += 1;
+        output.textContent = 
+`You sip, you exult, there is pep in your step
+current pep: ${pep}
+        `
+    } else if (command == "PET CAT") {
+        if(pep > 0) {
+            pep -= 1;
+            output.textContent = 
+`Your caffeine heightened reflexes allow you
+to chase down your loyal cat and initiate
+ear scratch protocol
+
+.
+.
+.
+... SUCCESS!`
+            score += 10;
+        } else {
+            output.textContent = 
+`Your feline friend eludes your grasp.
+You feel groggy.`
+        }
+    } else {
+        output.textContent = 
+`unknown command: ${command}
+COMMANDS UNDERSTOOD ARE
+DRINK COFFEE
+PET CAT
+LEAVE HOME
+`
+    }
+
+
+    setScore();
+    setPep();
+    outputZone.appendChild(output);
+}
+
+input.addEventListener('keyup', enterListener)</script>
+    </body>
+</html>
+
