@@ -81,12 +81,17 @@ enterListener = (e) => {
     }
 };
 
+getCatName = () => {
+    const names = ['Captain Mittens', 'Professor Whiskers', 'Postdoc Scratcher', 'Bitey'];
+    return names[Math.floor(Math.random() * names.length)];
+}
+
 handle = command => {
     output = document.createElement('pre');
     if(command == "LEAVE HOME") {
         if(score == 0) {
             output.textContent =
-            `You cannot leave without petting Captain Mittens`
+            `You cannot leave without petting ${getCatName()}`
         } else {
         output.textContent = 
 `You bravely leave home, but soon learn there are no cats to pet, and naught but fresca to imbibe
