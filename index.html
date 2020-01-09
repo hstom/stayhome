@@ -84,11 +84,16 @@ enterListener = (e) => {
 handle = command => {
     output = document.createElement('pre');
     if(command == "LEAVE HOME") {
+        if(score == 0) {
+            output.textContent =
+            `You cannot leave without petting Captain Mittens`
+        } else {
         output.textContent = 
 `You bravely leave home, but soon learn there are no cats to pet, and naught but fresca to imbibe
 === YOU LOSE ===
 final score: ${score}`;
     input.removeEventListener('keyup', enterListener);
+        }
 
     } else if (command == "DRINK COFFEE") {
         pep += 1;
