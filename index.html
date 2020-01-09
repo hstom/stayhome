@@ -85,8 +85,9 @@ setPep = () => pepZone.textContent = `pep: ${pep}`;
 setPep();
 
 initialPrompt = document.createElement('pre');
+initialPrompt.style.whiteSpace = 'pre-wrap';
 initialPrompt.textContent = `
-WELCOME TO STAYHOME SIMULATOR 2019
+WELCOME TO STAYHOME SIMULATOR 2020
 DO WHAT YOU MUST
 (case sensitive)`;
 outputZone.appendChild(initialPrompt);
@@ -106,6 +107,7 @@ getCatName = () => {
 
 handle = command => {
     output = document.createElement('pre');
+    output.style.whiteSpace = 'pre-wrap';
     if(command == "LEAVE HOME") {
         if(score == 0) {
             output.textContent =
