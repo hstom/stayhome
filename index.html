@@ -46,15 +46,16 @@ infoZone.appendChild(scoreZone);
 emojiCommands = [
     ['🐈', 'PET CAT'],
     ['☕', 'DRINK COFFEE'],
-    ['🚶', 'LEAVE HOME']
+    ['🚶', 'LEAVE HOME', {transform: 'scale(-1, 1)'}]
 ]
 
-emojiCommands.forEach(([emoji, command]) => {
+emojiCommands.forEach(([emoji, command, styles = {}]) => {
     const id = `EMOJI${command}`;
     emojiButtonWithLabel = document.createElement('div');
     emojiButton = document.createElement('button');
     emojiButton.textContent = emoji;
     emojiButton.addEventListener('click', () => handle(command));
+    Object.entries(styles).forEach(([key, value]) => emojiButton.style[key] = value);
     emojiButton.style.fontSize = '400%';
     emojiButton.id = id;
     emojiButton.style.display = 'block';
