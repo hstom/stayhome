@@ -16,6 +16,14 @@ inputZone.style.width = 'fit-content';
 inputZone.style.backgroundColor = 'white';
 document.body.appendChild(inputZone);
 
+emojiZone = document.createElement('div');
+emojiZone.style.position = 'sticky';
+emojiZone.style.top = "0px";
+emojiZone.style.padding = "5px";
+emojiZone.style.width = 'fit-content';
+emojiZone.style.backgroundColor = 'white';
+document.body.appendChild(emojiZone);
+
 input = document.createElement('input');
 inputZone.appendChild(input);
 
@@ -30,6 +38,20 @@ document.body.appendChild(infoZone);
 
 scoreZone = document.createElement('div');
 infoZone.appendChild(scoreZone);
+
+emojiCommands = [
+    ['🐈', 'PET CAT'],
+    ['☕', 'DRINK COFFEE'],
+    ['🚶', 'LEAVE HOME']
+]
+
+emojiCommands.forEach(([emoji, command]) => {
+    emojiButton = document.createElement('button');
+    emojiButton.textContent = emoji;
+    emojiButton.addEventListener('click', () => handle(command));
+    emojiButton.style.fontSize = '400%';
+    emojiZone.appendChild(emojiButton);
+})
 
 let score = 0;
 
@@ -103,6 +125,7 @@ LEAVE HOME
     }
 
 
+    output.textContent = command + '\n' + output.textContent;
     setScore();
     setPep();
     outputZone.prepend(output);
