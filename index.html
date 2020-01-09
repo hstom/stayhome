@@ -8,6 +8,8 @@
     KITCHEN: true
 };
 
+const PHI = 1 / Math.cos(2 * Math.acos(-1) / 5) / 2;
+const PHI2 = -1 / Math.cos(1 * Math.acos(-1) / 5) / 2;
 document.body.style.fontSize = 'calc(max(30px, 4vh))';
 
 inputZone = document.createElement('div');
@@ -47,18 +49,18 @@ infoZone.appendChild(scoreZone);
 let GAME_OVER = false;
 
 emojiCommands = [
-    ['🐈', 'PET CAT'],
-    ['☕', 'DRINK COFFEE'],
+    ['🐈', 'PET CAT', {transform: 'scale(-1, 1)'}],
+    ['☕', 'DRINK COFFEE', {transform: 'scale(-1, 1)'}],
     ['🚶', 'LEAVE HOME', {transform: 'scale(-1, 1)'}]
 ]
 
 emojiCommands.forEach(([emoji, command, styles = {}]) => {
-    const id = `EMOJI${command}`;
-    emojiButtonWithLabel = document.createElement('div');
-    emojiButton = document.createElement('button');
+    const id = `EMOJI${emoji}`;
+    let emojiButtonWithLabel = document.createElement('div');
+    let emojiButton = document.createElement('div');
     emojiButton.textContent = emoji;
-    emojiButton.addEventListener('click', () => !GAME_OVER && handle(command));
     Object.entries(styles).forEach(([key, value]) => emojiButton.style[key] = value);
+    emojiButton.style.textAlign = 'center';
     emojiButton.style.fontSize = '400%';
     emojiButton.id = id;
     emojiButton.style.display = 'block';
@@ -70,6 +72,30 @@ emojiCommands.forEach(([emoji, command, styles = {}]) => {
     emojiButtonWithLabel.style.display = 'inline-block';
     emojiButtonWithLabel.appendChild(emojiLabel);
     emojiButtonWithLabel.style.padding = "5px";
+    emojiButtonWithLabel.style.border = '1px solid black';
+    emojiButtonWithLabel.addEventListener('click', () => !GAME_OVER && handle(command));
+    emojiButtonWithLabel.style.overflow = 'hidden';
+
+    // if(emoji === '🚶') {
+    (() => {
+        console.log(id);
+        let rot = 0;
+
+        let interval = 0;
+        let rotate = () => {
+            rot += 1;
+            emojiButton.style.transform = `rotate(${20 * PHI2 * rot}deg) rotate3d(0, 1, 0, ${10 * PHI * rot}deg) scale(-1, 1) perspective(0)`;
+        }
+
+        emojiButtonWithLabel.addEventListener('mouseenter', () => {
+            interval = setInterval(rotate, 25);
+        });
+        emojiButtonWithLabel.addEventListener('mouseleave', () => {
+            rot = 0;
+            clearInterval(interval);
+            emojiButton.style.transform = 'scale(-1, 1)';
+        })
+    })()
 
     emojiZone.appendChild(emojiButtonWithLabel);
 })
