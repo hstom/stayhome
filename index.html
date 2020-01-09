@@ -8,6 +8,8 @@
     KITCHEN: true
 };
 
+document.body.style.fontSize = '20px';
+
 inputZone = document.createElement('div');
 inputZone.style.position = 'sticky';
 inputZone.style.top = "0px";
@@ -15,6 +17,9 @@ inputZone.style.padding = "5px";
 inputZone.style.width = 'fit-content';
 inputZone.style.backgroundColor = 'white';
 document.body.appendChild(inputZone);
+
+input = document.createElement('input');
+inputZone.appendChild(input);
 
 emojiZone = document.createElement('div');
 emojiZone.style.position = 'sticky';
@@ -24,8 +29,7 @@ emojiZone.style.width = 'fit-content';
 emojiZone.style.backgroundColor = 'white';
 document.body.appendChild(emojiZone);
 
-input = document.createElement('input');
-inputZone.appendChild(input);
+document.body.appendChild(document.createElement('hr'));
 
 outputZone = document.createElement('div');
 document.body.appendChild(outputZone);
@@ -46,11 +50,24 @@ emojiCommands = [
 ]
 
 emojiCommands.forEach(([emoji, command]) => {
+    const id = `EMOJI${command}`;
+    emojiButtonWithLabel = document.createElement('div');
     emojiButton = document.createElement('button');
     emojiButton.textContent = emoji;
     emojiButton.addEventListener('click', () => handle(command));
     emojiButton.style.fontSize = '400%';
-    emojiZone.appendChild(emojiButton);
+    emojiButton.id = id;
+    emojiButton.style.display = 'block';
+    emojiButtonWithLabel.appendChild(emojiButton);
+    emojiLabel = document.createElement('label');
+    emojiLabel.textContent = command;
+    emojiLabel.setAttribute('for', id);
+    emojiLabel.style.display = 'block';
+    emojiButtonWithLabel.style.display = 'inline-block';
+    emojiButtonWithLabel.appendChild(emojiLabel);
+    emojiButtonWithLabel.style.padding = "5px";
+
+    emojiZone.appendChild(emojiButtonWithLabel);
 })
 
 let score = 0;
